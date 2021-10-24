@@ -1,0 +1,24 @@
+{
+  "name": "mini_c",
+  "version": "1.0.0",
+  "description": "This is a small C-like programming language compiler written entirly in Typescript for Compilers 101 class",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/scanner.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devnspr/mini_c.git"
+  },
+  "author": "Mohammad N. Dizgovin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devnspr/mini_c/issues"
+  },
+  "homepage": "https://github.com/devnspr/mini_c#readme",
+  "dependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
