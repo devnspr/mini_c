@@ -21,14 +21,14 @@ export class DfaRunner implements IDfaRunner {
     public run(input: string): { accepted: boolean; label: string } {
         for (let i = 0; i < input.length; i++) {
             let char = input.charAt(i)
-            console.log("running for char "+ char)
+            //console.log("running for char "+ char)
             let symbol: ISymbol = new Symbol(char)
             if (this.dfa.canTransit(this.currentState, symbol)) {
                 let temp = this.currentState.label
                 this.currentState = this.dfa.transit(this.currentState, symbol)
-                console.log(`transited from ${temp} to ${this.currentState.label} using symbol ${char}`)
+                //console.log(`transited from ${temp} to ${this.currentState.label} using symbol ${char}`)
             } else {
-                console.log(`cant transit from ${this.currentState.label} using symbol ${char}`)
+                //console.log(`cant transit from ${this.currentState.label} using symbol ${char}`)
                 return {accepted: false, label: "NO_TRANSIT"}
             }
         }

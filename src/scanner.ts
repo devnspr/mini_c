@@ -339,12 +339,34 @@ let dfa: IDfa = new Dfa(
 
 let runner: IDfaRunner = new DfaRunner(dfa)
 
-let items = ["FO", "for", "while", "whil", "identifier", "2584"]
-for (let item of items) {
-    console.log(`--------------- Running for input ${item} ---------------`)
-    runner.reset()
-    let a = runner.run(item)
-    console.log(`result for ${item}`, JSON.stringify(a))
+let t1 = `name = "mohammad";`
+
+
+scan(t1)
+
+function scan(text: string) {
+    console.log("Scanning: ", text)
+    let text2: string = text.split(" ").join()
+    text2 = text2.split("\n").join()
+    text2 = text2.split("\t").join()
+    while(text2 != "") {
+        runner.reset()
+        let lastAcceptedToken: string = "";
+        let lastAcceptedType: string = "";
+        for (let char of text2) {
+            let result = runner.run(char)
+            if (result.accepted) {
+                lastAcceptedToken += char
+                lastAcceptedType = result.label
+            } else {
+                if (result.label == "NO_TRANSIT") {
+                    break
+                }
+            }
+        }
+        if (lastAcceptedToken.length > 0){
+            console.log(`<${lastAcceptedToken}> : <${lastAcceptedType}>`)
+            text2 = text2.substring(lastAcceptedToken.length, text2.length);
+        } else text2 = text2.substring(1, text2.length)
+    }
 }
-
-
