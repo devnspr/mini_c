@@ -26,13 +26,13 @@ export class Dfa implements IDfa {
         transitions: Array<ITransition>,
         terminals: Array<IState>,
         states: Array<IState>,
-        symbols: Array<ISymbol>
+        symbols?: Array<ISymbol>
     ) {
         this.start = start
         this.transitions = transitions
         this.terminals = terminals
         this.states = states
-        this.symbols = symbols
+        this.symbols = symbols ? symbols : []
     }
 
     public isTerminal(state: IState): boolean {
@@ -63,7 +63,7 @@ export class Dfa implements IDfa {
                 return transition.end
             }
         }
-        return new State("")
+        return new State("", "")
     }
 
     public canTransit(state: IState, symbol: ISymbol): boolean {

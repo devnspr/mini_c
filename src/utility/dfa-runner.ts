@@ -5,7 +5,7 @@ import {ISymbol, Symbol} from "./dfa/symbol";
 export interface IDfaRunner {
     dfa: IDfa;
     currentState: IState;
-    run: (input: string) => boolean;
+    run: (input: string) => { accepted: boolean; label: string };
     reset: () => void;
 }
 
@@ -18,7 +18,7 @@ export class DfaRunner implements IDfaRunner {
         this.currentState = dfa.start
     }
 
-    public run(input: string): boolean {
+    public run(input: string): { accepted: boolean; label: string } {
         for (let i = 0; i < input.length; i++) {
             let char = input.charAt(i)
             console.log("running for char "+ char)
@@ -29,10 +29,13 @@ export class DfaRunner implements IDfaRunner {
                 console.log(`transited from ${temp} to ${this.currentState.label} using symbol ${char}`)
             } else {
                 console.log(`cant transit from ${this.currentState.label} using symbol ${char}`)
-                return false
+                return {accepted: false, label: "NO_TRANSIT"}
             }
         }
-        return this.dfa.isTerminal(this.currentState)
+        return {
+            accepted: this.dfa.isTerminal(this.currentState),
+            label: this.currentState.name
+        }
     }
 
     public reset() {
